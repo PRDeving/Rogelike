@@ -1,0 +1,5 @@
+if [ ! -d "bin" ]; then
+  mkdir bin;
+fi
+
+g++ -w src/main.cpp -I/Library/Frameworks/SDL2_image.framework/Headers -I/Library/Frameworks/SDL2.framework/Headers -framework SDL2 -framework SDL2_image -o bin/rogelike
