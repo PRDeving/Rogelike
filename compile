@@ -1,0 +1,19 @@
+if [ ! -d "bin" ]; then
+  mkdir bin;
+fi
+
+DEFAULT="0.1.0"
+if [ -z $1 ]; then
+  VERSION="\"$DEFAULT\""
+else
+  VERSION="\"$1\""
+fi
+
+FLAGS="-w -Wextra -g -O4 -std=c++11"
+
+# DEPS
+DEP_SDL2="-I/Library/Frameworks/SDL2.framework/Headers -framework SDL2"
+DEP_SDL2_image="-I/Library/Frameworks/SDL2_image.framework/Headers -framework SDL2_image"
+DEP_SDL2_ttf="-I/Library/Frameworks/SDL2_ttf.framework/Headers -framework SDL2_ttf"
+
+g++ $FLAGS src/main.cpp $DEP_SDL2 $DEP_SDL2_image $DEP_SDL2_ttf -DVERSION="$VERSION" -o bin/rogelike
