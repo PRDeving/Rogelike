@@ -1,99 +1,92 @@
-#include <string>
-#include <iostream>
-#include <SDL.h>
-
-const int SCREEN_W = 400;
-const int SCREEN_H = 400;
-
-#include "utils/SDL_CleanUp.h"
-#include "utils/SDL_ErrorLog.h"
-#include "utils/TexturesHandler.h"
-
-#include "prefabs/player.h"
-
-#include "assets/map.h"
-
+#include "utils/headers.h"
 
 int main (int argc, char* argv[]) {
-  srand(time(NULL));
 
-  if (SDL_Init(SDL_INIT_VIDEO) != 0){
-    std::cout << "SDL_Init Error: " << SDL_GetError() << std::endl;
-    return 1;
-  }
+  if(!Initialize()) return 0;
 
-  int imgFlags = IMG_INIT_PNG | IMG_INIT_JPG;
-  if( !( IMG_Init( imgFlags ) & imgFlags ) ){
-    riseSDLError(std::cout, "SDL_image");
-  }
+  if(FullScreen) SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
 
-  SDL_Window *win = SDL_CreateWindow("Rogelike", 100, 100, SCREEN_W, SCREEN_H, SDL_WINDOW_SHOWN);
-  if (win == nullptr){
-    riseSDLError(std::cout, "SDL_CreateWindow");
-    SDL_Quit();
-    return 1;
-  }
-
-  SDL_Renderer *ren = SDL_CreateRenderer(win, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
-  if (ren == nullptr){
-    SDL_DestroyWindow(win);
-    riseSDLError(std::cout, "SDL_CreateRenderer");
-    SDL_Quit();
-    return 1;
-  }
-
-
-
-  // SDL_Texture *grass = Textures::loadTexture("../media/grass.jpg", ren);
   SDL_Texture *grass = Textures::loadTexture("../media/rock.png", ren);
+  SDL_Texture *shadow = Textures::loadTexture("../media/shadow.png", ren);
+  SDL_Texture *shadow_bg = Textures::loadTexture("../media/bg_shadow.png", ren);
+  
+  const int MapS = 300;
 
-  Map m(ren,100,100);
-  Player pl(ren, "../media/claude.png", m);
-  // std::cout << m.length() << std::endl;
+  StatusBar statusBar;
+
+  Map m(ren,MapS,MapS);
+  Player pl(ren, "../media/male_base.png", m);
+
+
+  // SDL_Color color = { 255, 255, 255, 255 };
+  // Fonts::Font font1 = Fonts::newFont("../media/CaveatBrush-Regular.ttf", 21, color);
+  // SDL_Texture* text = NULL;
+
 
   bool quit = false;
   SDL_Event e;
-
   while(!quit){
 
     // EVENTS HANDLING
     while(SDL_PollEvent(&e)){
-      if (e.type == SDL_KEYDOWN){
-        switch (e.key.keysym.scancode) {
-          case 26:
-            pl.Up();
-          break;
-          case 7:
-            pl.Right();
-          break;
-          case 22:
-            pl.Down();
-          break;
-          case 4:
-            pl.Left();
-          break;
-          case 41:
-            quit = true;
-          break;
-        }
+      if (e.type == 1211) {
+        pl.Stop();
+      }
+      if (e.type == 1212) {
+        std::cout << "level Finished!!" << std::endl;
+        m.GenerateLevel();
+        pl.set(m);
       }
       if (e.type == SDL_QUIT){
         quit = true;
+      }
+
+      if (e.type == SDL_KEYDOWN){
+        switch (e.key.keysym.scancode) {
+          case 41:
+            quit = true;
+          break;
+          case 21:
+            SDL_Event event;
+            SDL_memset(&event, 0, sizeof(event));
+            event.type = 1212;
+            SDL_PushEvent(&event);
+          break;
+          default: 
+            pl.Controls(true, e.key.keysym.scancode);
+          break;
+        }
+      }
+      if (e.type == SDL_KEYUP){
+        switch (e.key.keysym.scancode) {
+          default: 
+            pl.Controls(false, e.key.keysym.scancode);
+          break;
+        }
       }
     }
 
     SDL_RenderClear(ren);
 
     Textures::renderTexture(grass, ren, 0, 0, SCREEN_W, SCREEN_H);
+    Textures::renderTexture(shadow_bg, ren, 0, 0, SCREEN_W, SCREEN_H);
+    Textures::renderTexture(shadow_bg, ren, 0, 0, SCREEN_W, SCREEN_H);
+
     m.Render(ren, pl.pos);
     pl.Render(ren, 1, 1, m);
 
+    Textures::renderTexture(shadow_bg, ren, 0, 0, SCREEN_W, SCREEN_H);
+    Textures::renderTexture(shadow_bg, ren, 0, 0, SCREEN_W, SCREEN_H);
+
+    statusBar.getData(pl);
+    statusBar.Render(ren);
 
     SDL_RenderPresent(ren);
   }
 
 
-  cleanup(grass, ren, win);
+  cleanup(grass, shadow, shadow_bg, ren, win);
   IMG_Quit();
+  TTF_Quit();
   SDL_Quit();
 }

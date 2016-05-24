@@ -12,15 +12,18 @@
     int h;
 
     std::vector<vec2> cave;
-    vec2 goal;
 
     // Sprites::SpriteObj rock;
     Sprites::SpriteObj path;
+    Sprites::SpriteObj door;
 
-    void GenerateLevel();
 
     public:
       vec2 init;
+      vec2 goal;
+      bool goalReached = false;
+
+      void GenerateLevel();
       Map(SDL_Renderer* ren, int w, int h);
       ~Map();
       bool Walkable(int x, int h);
@@ -29,7 +32,8 @@
   };
 
   Map::Map(SDL_Renderer* ren, int w, int h) {
-    path = Sprites::Sprite("../media/path.png", ren, 1, 1, 60, 60, 1);
+    path = Sprites::Sprite("../media/path.png", ren, 1, 1, 80, 70, 1);
+    door = Sprites::Sprite("../media/door.png", ren, 1, 5, 7);
     this->w = w;
     this->h = h;
 
@@ -37,9 +41,14 @@
   }
   Map::~Map() {
     cleanup(this->path.spriteSheet);
+    cleanup(this->door.spriteSheet);
   }
 
   void Map::GenerateLevel() {
+    cave.clear();
+    this->door.currFrameH = 0;
+    this->goalReached = false;
+
     vec2 step;
     step.x = this->w / 2;
     step.y = this->h / 2;
@@ -80,6 +89,22 @@
 
   void Map::Render(SDL_Renderer* ren, SDL_Rect &camera) {
     for(int t = 0; t < cave.size(); t++)
-      Sprites::drawFrame(ren, this->path, (cave[t].x*60) - camera.x + SCREEN_W/2, (cave[t].y*60) - camera.y + SCREEN_H/2 );
+      Sprites::drawFrame(ren, this->path, (cave[t].x*60) - camera.x + SCREEN_W/2 - 10, (cave[t].y*60) - camera.y + SCREEN_H/2 - 10 );
+
+    if(goalReached){
+      Sprites::getNextFrame(ren, this->door, (cave[cave.size() -1].x*60) - camera.x + SCREEN_W/2, (cave[cave.size() -1].y*60) - camera.y + SCREEN_H/2 - 30 );
+        SDL_Event event;
+        SDL_memset(&event, 0, sizeof(event)); /* or SDL_zero(event) */
+        event.type = 1211;
+        SDL_PushEvent(&event);
+      if(this->door.currFrameH == 4) {
+        SDL_Event event;
+        SDL_memset(&event, 0, sizeof(event)); /* or SDL_zero(event) */
+        event.type = 1212;
+        SDL_PushEvent(&event);
+      }
+    } else {
+      Sprites::drawFrame(ren, this->door, (cave[cave.size() -1].x*60) - camera.x + SCREEN_W/2, (cave[cave.size() -1].y*60) - camera.y + SCREEN_H/2 - 30 );
+    }
   }
 #endif
