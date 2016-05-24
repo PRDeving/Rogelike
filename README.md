@@ -46,6 +46,7 @@ compile scripts automaticly tags the version as provided, version can be changed
 #CHANGELOG
 
 ### 0.1.0
+  - Texture-based GPU renderization
   - Improved WASD movement system with ease
   - Improved Cave generation algorythm
   - Added final door in each level. when reached, a new level is generated
