@@ -38,8 +38,8 @@ namespace Sprites {
     tempSprite.sheetW = w;
     tempSprite.sheetH = h;
 
-    tempSprite.frameW = tempSprite.sheetW / tempSprite.vFrames;
-    tempSprite.frameH = tempSprite.sheetH / tempSprite.hFrames;
+    tempSprite.frameW = tempSprite.sheetW / tempSprite.hFrames;
+    tempSprite.frameH = tempSprite.sheetH / tempSprite.vFrames;
 
     tempSprite.animSpeedC = speed;
 
@@ -58,8 +58,8 @@ namespace Sprites {
 
     SDL_QueryTexture(tempSprite.spriteSheet, NULL, NULL, &tempSprite.sheetW, &tempSprite.sheetH);
 
-    tempSprite.frameW = tempSprite.sheetW / tempSprite.vFrames;
-    tempSprite.frameH = tempSprite.sheetH / tempSprite.hFrames;
+    tempSprite.frameW = tempSprite.sheetW / tempSprite.hFrames;
+    tempSprite.frameH = tempSprite.sheetH / tempSprite.vFrames;
 
     tempSprite.animSpeedC = speed;
 
