@@ -1,5 +1,5 @@
 # Rogelike
-A simple Hack-and-slash Rogelike game in C++
+Hack-and-slash Rogelike game wirtten in C++ and SDL2
 
 #Dependencies
  - SDL2
