@@ -1,10 +1,6 @@
 #ifndef H_TEXTURESHANDLER
 #define H_TEXTURESHANDLER
 
-
-#include <SDL_image.h>
-#include <string>
-
 #include "./SDL_CleanUp.h"
 #include "./SDL_ErrorLog.h"
 

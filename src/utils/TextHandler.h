@@ -1,8 +1,6 @@
 #ifndef H_TEXTHANDLER
 #define H_TEXTHANDLER
 
-  #include <SDL_ttf.h>
-
   namespace Fonts {
     typedef struct {
       TTF_Font* format;

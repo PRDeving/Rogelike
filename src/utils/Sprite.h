@@ -1,8 +1,6 @@
 #ifndef H_SPRITE
 #define H_SPRITE
 
-#include <string>
-
 #include "TexturesHandler.h"
 
 namespace Sprites {

@@ -64,9 +64,9 @@
   Player::Player(SDL_Renderer* renderer, std::string spritesheet, Map &m) {
     this->sprite = Sprites::Sprite(spritesheet, renderer, 4, 9, 2);
 
-    this->head = Sprites::Sprite("../media/hair_head.png", renderer, 4, 9, 2);
-    this->torso = Sprites::Sprite("../media/shirt_torso.png", renderer, 4, 9, 2);
-    this->legs = Sprites::Sprite("../media/robe_legs.png", renderer, 4, 9, 2);
+    this->head = Sprites::Sprite("./media/hair_head.png", renderer, 4, 9, 2);
+    this->torso = Sprites::Sprite("./media/shirt_torso.png", renderer, 4, 9, 2);
+    this->legs = Sprites::Sprite("./media/robe_legs.png", renderer, 4, 9, 2);
     set(m);
   }
   void Player::set(Map &m) {

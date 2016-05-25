@@ -2,14 +2,25 @@
 #define H_HEADERS
   #include "./definitions.h"
 
-  // Core
-  #include <string>
-  #include <iostream>
 
   // Dependencies
-  #include <SDL.h>
-  #include <SDL_image.h>
-  #include <SDL_ttf.h>
+  #include <utility>
+  #include <cstring>
+  #include <iostream>
+  #include <vector>
+  #include <time.h>
+  #include <random>
+
+  // Core
+  #ifdef __linux
+    #include <SDL2/SDL.h>
+    #include <SDL2/SDL_image.h>
+    #include <SDL2/SDL_ttf.h>
+  #elif __APPLE__
+    #include <SDL.h>
+    #include <SDL_image.h>
+    #include <SDL_ttf.h>
+  #endif
 
   // Utils
   #include "./Initialize.h"

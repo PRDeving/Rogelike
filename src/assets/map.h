@@ -1,8 +1,6 @@
 #ifndef H_ASSETS_MAP
 #define H_ASSETS_MAP
 
-#include <vector>
-
 #include "../utils/Random.h"
 #include "../utils/Vec2.h"
 #include "../utils/SDL_CleanUp.h"
@@ -32,8 +30,8 @@
   };
 
   Map::Map(SDL_Renderer* ren, int w, int h) {
-    path = Sprites::Sprite("../media/path.png", ren, 1, 1, 80, 70, 1);
-    door = Sprites::Sprite("../media/door.png", ren, 1, 5, 7);
+    path = Sprites::Sprite("./media/path.png", ren, 1, 1, 80, 70, 1);
+    door = Sprites::Sprite("./media/door.png", ren, 1, 5, 7);
     this->w = w;
     this->h = h;
 

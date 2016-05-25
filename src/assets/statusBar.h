@@ -9,8 +9,8 @@
     int maxStamina, maxHp, maxEnergy;
 
     SDL_Color color = { 255, 255, 255, 255 };
-    Fonts::Font font1 = Fonts::newFont("../media/CaveatBrush-Regular.ttf", 18, color);
-    Fonts::Font fontSmall = Fonts::newFont("../media/CaveatBrush-Regular.ttf", 14, color);
+    Fonts::Font font1 = Fonts::newFont("./media/CaveatBrush-Regular.ttf", 18, color);
+    Fonts::Font fontSmall = Fonts::newFont("./media/CaveatBrush-Regular.ttf", 14, color);
 
     public:
       void getData(Player& player);
@@ -46,9 +46,9 @@
     Textures::renderTexture(enT, ren, 5, 50);
     Textures::renderTexture(stT, ren, 5, 70);
 
-    std::string txtversion = "v " + std::string(VERSION);
+    std::string txtversion = "v " + std::string(BUILD_INFO);
     SDL_Texture* vT = Fonts::processText(ren, txtversion, fontSmall);
-    Textures::renderTexture(vT, ren, SCREEN_W - 50, SCREEN_H - 25);
+    Textures::renderTexture(vT, ren, SCREEN_W - 100, SCREEN_H - 25);
 
     cleanup(nameT, hpT, enT, stT, vT);
   }

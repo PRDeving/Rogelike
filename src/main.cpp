@@ -6,16 +6,16 @@ int main (int argc, char* argv[]) {
 
   if(FullScreen) SDL_SetWindowFullscreen(win, SDL_WINDOW_FULLSCREEN);
 
-  SDL_Texture *grass = Textures::loadTexture("../media/rock.png", ren);
-  SDL_Texture *shadow = Textures::loadTexture("../media/shadow.png", ren);
-  SDL_Texture *shadow_bg = Textures::loadTexture("../media/bg_shadow.png", ren);
+  SDL_Texture *grass = Textures::loadTexture("./media/rock.png", ren);
+  SDL_Texture *shadow = Textures::loadTexture("./media/shadow.png", ren);
+  SDL_Texture *shadow_bg = Textures::loadTexture("./media/bg_shadow.png", ren);
   
   const int MapS = 300;
 
   StatusBar statusBar;
 
   Map m(ren,MapS,MapS);
-  Player pl(ren, "../media/male_base.png", m);
+  Player pl(ren, "./media/male_base.png", m);
 
 
   // SDL_Color color = { 255, 255, 255, 255 };
