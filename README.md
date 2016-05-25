@@ -44,6 +44,7 @@ compile scripts automaticly tags the version as provided, version can be changed
 
 
 #CHANGELOG
+  - Compile script updated for Mac and Linux
 
 ### 0.1.0
   - Texture-based GPU renderization
@@ -60,6 +61,6 @@ compile scripts automaticly tags the version as provided, version can be changed
   - fixed weird PJ position when approaching top tiles
   - fixed typo in TexturesHandler that didnt seize spritesheets propperly
   - Added version number in bottom-right corner
-  - Modified compile script to define buil VERSION
+  - Modified compile script to define build VERSION
   - New Level when R pressed (testing pruporses)
 
