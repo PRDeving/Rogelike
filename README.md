@@ -7,9 +7,9 @@ Hack-and-slash Rogelike game wirtten in C++ and SDL2
  - SDL_ttf
 
 #Compile
-compile script has been written to easyly compile in MAC OS systems (using -framework)
+compile script has been written to easyly compile in MAC OS systems (using -framework) and Unix systems
 
-to compile in Mac Os run: `./compile`
+to compile in Mac OS or Unix run: `./compile`
 to compile in other systems run `gcc`, `g++`, or `clang` importing the required libraries
 
 compile scripts automaticly tags the version as provided, version can be changed passing the version as argument
