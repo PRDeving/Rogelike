@@ -29,8 +29,9 @@ if [ $SYSTEM == "Linux" ]; then
 
   g++ $FLAGS $INCLUDES src/main.cpp -DBUILD_INFO="\"$BUILD_INFO\"" $DEPS -o $BUILD_PATH/rogelike-$BUILD_INFO
 else
-  INCLUDES="-I/Library/Frameworks/SDL2.framework/Headers -I/Library/Frameworks/SDL2_image/Headers -I/Library/Framewors/SDL_ttf/Headers"
-  DEPS="-framework SDL2 -framework SDL_image -framework SDL_ttf"
-  
+
+  DEP_SDL2="-I/Library/Frameworks/SDL2.framework/Headers -framework SDL2"
+  DEP_SDL2_image="-I/Library/Frameworks/SDL2_image.framework/Headers -framework SDL2_image"
+  DEP_SDL2_ttf="-I/Library/Frameworks/SDL2_ttf.framework/Headers -framework SDL2_ttf"
   g++ $FLAGS src/main.cpp $DEP_SDL2 $DEP_SDL2_image $DEP_SDL2_ttf -DBUILD_INFO="\"$BUILD_INFO\"" -o $BUILD_PATH/rogelike-$BUILD_INFO
 fi
