@@ -35,4 +35,5 @@
   // Assets
   #include "../assets/map.h"
   #include "../assets/statusBar.h"
+  #include "../assets/inventory.h"
 #endif

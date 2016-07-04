@@ -17,11 +17,10 @@ int main (int argc, char* argv[]) {
   Map m(ren,MapS,MapS);
   Player pl(ren, "./media/male_base.png", m);
 
-
-  // SDL_Color color = { 255, 255, 255, 255 };
-  // Fonts::Font font1 = Fonts::newFont("../media/CaveatBrush-Regular.ttf", 21, color);
-  // SDL_Texture* text = NULL;
-
+  // DEBUG INVENTARY
+  Inventory.newItem(1);
+  Inventory.newItem(2);
+  Inventory.newItem(1);
 
   bool quit = false;
   SDL_Event e;

@@ -13,27 +13,46 @@
 
   typedef struct {
     unsigned int id;
-    unsigned int quantity;
-  } Inveentory_entry;
-
-  typedef struct {
-    unsigned int id;
-    int capacity;
-    std::vector<Item> items;
-  } Inventory;
-
-  typedef struct {
-    unsigned int id;
     std::string name;
     SDL_Texture* inventoryImage;
     Sprites::SpriteObj spritesheet;
     unsigned int weight;
+    unsigned int quantity;
     unsigned int use_options = 0x00;
   } Item;
 
-  Item* newItem(std::string inventoryImage, std::string spritesheet) {
-    this->inventoryImage = Textures::loadTexture(inventoryImage, ren);
-    this->spritesheet = Sprites::Sprite(spritesheet, ren, 4, 9, 2);
+  class _Inventory {
+    private:
+      unsigned int id;
+      int capacity;
+      std::vector<Item> items;
+    public:
+      Item* addItem(unsigned int);
+  };
+  _Inventory Inventory;
+
+  Item* _Inventory::addItem(unsigned int ID) {
+    int c = this->items.size();
+    Item *found = nullptr;
+    while(c--) {
+      found = &items[c];
+      if(found->id == ID) {
+        found->quantity += 1;
+        return found;
+      }
+    }
+
+    // found.inventoryImage = Textures::loadTexture(inventoryImage, ren);
+    // found.spritesheet = Sprites::Sprite(spritesheet, ren, 4, 9, 2);
+
+    Item tmp;
+    tmp.id = ID;
+    tmp.name = "Test item 1";
+    tmp.weight = 1;
+    tmp.quantity = 1;
+    tmp.use_options |= IN_HEAD | IS_EQUIPABLE;
+    this->items.push_back(tmp);
+    return &tmp;
   }
 
 #endif
